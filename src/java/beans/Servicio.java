@@ -7,6 +7,7 @@ package beans;
 
 import clases.Perfil;
 import clases.Producto;
+import clases.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,6 +41,33 @@ public class Servicio implements ServicioLocal {
     public List<Producto> getProductos() {
         return em.createQuery("select p from Producto p").getResultList();
     }
+
+    @Override
+    public Usuario iniciarSesion(String rut, String clave) {
+        try{
+            return (Usuario)em.createNamedQuery("Usuario.iniciarSesion",Usuario.class)
+                    .setParameter("rutUser",rut).setParameter("clave",clave).getSingleResult();
+            
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public Usuario buscarUsuario(String rut) {
+        return em.find(Usuario.class,rut);
+    }
+
+    @Override
+    public void guardar(Object object) {
+        em.persist(object);
+    }
+    
+    
+    
+    
     
     
     

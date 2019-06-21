@@ -7,6 +7,7 @@ package beans;
 
 import clases.Perfil;
 import clases.Producto;
+import clases.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -20,5 +21,11 @@ public interface ServicioLocal {
     List<Perfil> getPerfiles();
 
     List<Producto> getProductos();
+
+    Usuario iniciarSesion(String rut, String clave);
+
+    Usuario buscarUsuario(String rut);
+
+    void guardar(Object object);
     
 }
